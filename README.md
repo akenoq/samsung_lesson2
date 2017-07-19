@@ -3,3 +3,12 @@
 https://developer.mozilla.org/ru/docs/IndexedDB/Using_IndexedDB
 
 При каждом onsuccess заново выкачивает rss
+
+Изображение заполняет весь блок
+.imgcont{
+	width: 350px;
+}
+.imgcont img {
+  max-width: 100%;
+  height: auto;
+}
