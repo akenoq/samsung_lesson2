@@ -8,7 +8,7 @@ window.onload = function () {
 };
 
 
-var baseName 	  = "WebBase2";
+var baseName 	  = "WebBase1";
 var storeName 	  = "WebBaseStore";
 
 
@@ -38,16 +38,50 @@ function getFeed(){
 			indicator.style.display = "none";
 
 		    $(xml).find("item").each(function () {
-		    	  var url =  $(this).find("enclosure").attr('url')
+		    	  var url =  $(this).find("enclosure").attr('url');
 
-			        $("#rssContent").append('<div class="feed"><div class="imgcont"><img src=' + url + ' width=' + width + 'px /></div><div class="title"> Title:' + $(this).find("title").text() 
+			       /* $("#rssContent").append('<div class="feed"><div class="imgcont"><img src=' + url + ' width=' + width + 'px /></div><div class="title"> Title:' + $(this).find("title").text() 
+			        		+ '</div><br><div class="description">Desc: ' + $(this).find("description").text() + '</div><div class="date">Date: ' + $(this).find("pubDate").text() + '</div></div>');
+*/				   
+		    	  var id_img = i.toString();
+		    	  
+		    	  console.log("aaaa");
+		    	  
+		    	  //нужно взять текущий id
+		    	  
+		    	  /* $("#rssContent").append('<div class="feed"><div class="imgcont"> <canvas id="myCan'+id_img+'" width="350" height="200"> <img id="myImg'+id_img+'" src=' + url + ' style="display: none" /> </div><div class="title"> Title:' + $(this).find("title").text() 
+			        		+ '</div><br><div class="description">Desc: ' + $(this).find("description").text() + '</div><div class="date">Date: ' + $(this).find("pubDate").text() + '</div></div>');*/
+		    	  
+		    	  
+		    	  $("#rssContent").append('<div class="feed"><div class="imgcont"><canvas id="myCan'+id_img+'" width="350" height="200"> </canvas><img id="myImg'+id_img+'" src=' + url + ' style="display: none" /></div><div class="title"> Title:' + $(this).find("title").text() 
 			        		+ '</div><br><div class="description">Desc: ' + $(this).find("description").text() + '</div><div class="date">Date: ' + $(this).find("pubDate").text() + '</div></div>');
 
+		    	  console.log(document.getElementById("myImg"+id_img).id);
+		    	  
+		    	  function drawImg(){
+		    		  var canvas = document.getElementById("myCan"+id_img);
+		    		  var holst = canvas.getContext("2d");
+		    		  var img = document.getElementById("myImg"+id_img);
+		    		  holst.drawImage(img, 0, 0);  		  
+		    	  }
+		    	  
+		    	  drawImg();
+		          		    	  
+		    	  function Base123(img) {  
+		    		    // создаем канвас элемент  
+		    		    var canvas = document.getElementById("myCan"+id_img);
+		    		    var holst = canvas.getContext("2d");
+		    		  
+		    		    // Получаем data-URL отформатированную строку  
+		    		    // Firefox поддерживает PNG и JPEG.   
+		    		    var dataURL = canvas.toDataURL("image/png");  
+		    		    return dataURL;
+		    		    //return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");  
+		    		}  
 
-		    	  setData($(this).find("title").text(), $(this).find("description").text(), $(this).find("enclosure").attr('url'), $(this).find("pubDate").text()); // чем плоха данная схема? переделать на передачу массива.
+		    	  setData($(this).find("title").text(), $(this).find("description").text(), Base123(document.getElementById("myImg"+id_img)), $(this).find("pubDate").text()); // чем плоха данная схема? переделать на передачу массива.
 		          
-
-		          
+		    	  
 		          i++;
 		    });
 		    
