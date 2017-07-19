@@ -12,3 +12,5 @@ https://developer.mozilla.org/ru/docs/IndexedDB/Using_IndexedDB
   max-width: 100%;
   height: auto;
 }
+
+http://drcreazy.com/art/61/base64-javascript.aspx
